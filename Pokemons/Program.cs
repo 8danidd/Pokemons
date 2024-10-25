@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 
 public class Lospokemons
@@ -13,12 +14,12 @@ public class Lospokemons
         ConsoleKeyInfo keyInfo;
         do
         {
-        Console.Clear();
-        Console.WriteLine("POKEMON");
-        Console.WriteLine("Pulsa cualquier tecla para empezar");
-        Console.ReadKey(true);
-        InitGame();
-        keyInfo = Console.ReadKey(true);
+            Console.Clear();
+            Console.WriteLine("POKEMON");
+            Console.WriteLine("Pulsa cualquier tecla para empezar");
+            Console.ReadKey(true);
+            InitGame();
+            keyInfo = Console.ReadKey(true);
         } while (keyInfo.Key != ConsoleKey.W);
 
     }
@@ -29,7 +30,7 @@ public class Lospokemons
         InitPokedex();
         Console.WriteLine("Pulsa Q para mostrar los equipos \nPulsa W para salir \n");
         ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
-        if (KeyInfo.Key == ConsoleKey.Q) {ShowTeam();}
+        if (KeyInfo.Key == ConsoleKey.Q) { ShowTeam(); }
     }
 
     static void InitPokedex()
@@ -45,29 +46,67 @@ public class Lospokemons
         }
     }
 
-        static void ShowTeam()
+    static void ShowTeam()
     {
         Console.Clear();
         Console.WriteLine("Pulsa la tecla para elegir al jugador:\n Ash (Pulsa A)\n Gary (Pulsa S)\n");
         ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
-        if (KeyInfo.Key == ConsoleKey.A) {player = "Ash";}
-        if (KeyInfo.Key == ConsoleKey.S) {player = "Gary";}
+        if (KeyInfo.Key == ConsoleKey.A) { player = "Ash"; }
+        if (KeyInfo.Key == ConsoleKey.S) { player = "Gary"; }
 
+        switch (player)
+        {
+            case ("Ash"):
+                Console.Clear();
+                Console.WriteLine("Los pokemons de Ash son: ");
+                for (int i = 0; i < ashPok.Length; ++i) { Console.Write(ashPok[i] + ", "); }
+                Console.WriteLine("\n");
+                break;
+
+            case ("Gary"):
+                Console.Clear();
+                Console.WriteLine("Los pokemons de Gary son: ");
+                for (int i = 0; i < garyPok.Length; ++i) { Console.Write(garyPok[i] + ", "); }
+                Console.WriteLine("\n");
+                break;
+        }
+        Console.WriteLine("Quieres eliminar algún pokemon? \n");
+        Console.WriteLine("Si: Y \nNo: N");
+        ConsoleKeyInfo KeyInfo2 = Console.ReadKey(true);
+        if (KeyInfo2.Key == ConsoleKey.Y) { DeletePok(); }
+        else
+        {
+            ShowTeam();
+        }
+    }
+
+    static void DeletePok()
+    {
+        Console.Clear();
+        Console.WriteLine("Elige el Pokemon a eliminar \n");
         if (player == "Ash")
         {
-            Console.Clear();
-            Console.WriteLine("Los pokemons de Ash son: ");
-            for (int i = 0; i < ashPok.Length; ++i) { Console.Write(ashPok[i] + ", "); }
-            Console.WriteLine("\n");
-            player = "none";
+            for (int i = 0; i < ashPok.Length; ++i) { Console.Write(ashPok[i] + " " + i + ", "); }
+            Console.Write("\n\nIntroduce el numero del pokemon:");
+            int posicion = Convert.ToInt32(Console.ReadLine());
+            BorrarPok(ashPok, posicion);
         }
         else
         {
-            Console.Clear();
-            Console.WriteLine("Los pokemons de Gary son: ");
-            for (int i = 0; i < garyPok.Length; ++i) { Console.Write(garyPok[i] + ", "); }
-            Console.WriteLine("\n");
-            player = "none";
+            for (int i = 0; i < garyPok.Length; ++i) { Console.Write(garyPok[i] + " " + i + ", "); }
+            Console.Write("\n\nIntroduce el numero del pokemon:");
+            int posicion = Convert.ToInt32(Console.ReadLine());
+            BorrarPok(garyPok, posicion);
         }
+
+    }
+
+    static void BorrarPok(string[] pokemons, int pos)
+    {
+        if (pos >= 0 && pos < pokemons.Length)
+        {
+            pokemons[pos] = "(VACIO)";
+            ShowTeam();
+        } else { Console.Clear(); Console.WriteLine("Posicion no valida"); Thread.Sleep(750); DeletePok(); }
     }
 }
