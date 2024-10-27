@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 
 public class Lospokemons
 {
+    //prueba git2
     static string[] pokemon = { "Bulbasaur", "Pikachu", "Charmander", "Onix", "Squirtle", "Jigglypuff", "Meowth", "Psyduck", "Snorlax", "Gengar", "Machop", "Geodude", "Eevee", "Vulpix", "Magikarp" };
     static string[] ashPok = new string[5];
     static string[] garyPok = new string[5];
