@@ -46,18 +46,18 @@ public class Lospokemons
         {
             case ConsoleKey.Q:
                 ShowTeam();
-                Console.WriteLine("Pulsa cualquier tecla para return to main menu");
+                Console.WriteLine("\nPulsa cualquier tecla para return to main menu");
                 break;
             case ConsoleKey.D:
                 DeletePok();
-                Console.WriteLine("Pulsa cualquier tecla para return to main menu");
+                Console.WriteLine("\nPulsa cualquier tecla para return to main menu");
                 break;
             case ConsoleKey.C:
                 Explore();
-                Console.WriteLine("Pulsa cualquier tecla para return to main menu");
+                Console.WriteLine("\nPulsa cualquier tecla para return to main menu");
                 break;
             case ConsoleKey.W:
-                //
+                
                 break;
         }
 
@@ -89,7 +89,8 @@ public class Lospokemons
             case ("Ash"):
                 Console.Clear();
                 Console.WriteLine("Los pokemons de Ash son: ");
-                for (int i = 0; i < ashPok.Length; ++i) { 
+                for (int i = 0; i < ashPok.Length; ++i)
+                {
                     string result = String.IsNullOrEmpty(ashPok[i]) ? (i + " - null , ") : (i + " - " + ashPok[i] + ", ");
                     Console.Write(result);
                 }
@@ -97,9 +98,13 @@ public class Lospokemons
                 break;
 
             case ("Gary"):
-                Console.Clear();    
+                Console.Clear();
                 Console.WriteLine("Los pokemons de Gary son: ");
-                for (int i = 0; i < garyPok.Length; ++i) { Console.Write(i + " - " + garyPok[i] + ", "); }
+                for (int i = 0; i < garyPok.Length; ++i)
+                {
+                    string result = String.IsNullOrEmpty(garyPok[i]) ? (i + " - null , ") : (i + " - " + garyPok[i] + ", ");
+                    Console.Write(result);
+                }
                 Console.WriteLine("\n");
                 break;
         }
@@ -125,7 +130,7 @@ public class Lospokemons
         int pos = Convert.ToInt32(Console.ReadLine());
 
         if (pos >= 0 && pos < ashPok.Length)
-        {  
+        {
             if (!String.IsNullOrEmpty(ashPok[pos]))
             {
                 ashPok[pos] = null;
@@ -134,9 +139,11 @@ public class Lospokemons
             {
                 Console.WriteLine("The position is empty");
             }
-        } else { 
-            Console.WriteLine("Posicion no valida"); 
-            Thread.Sleep(750); 
+        }
+        else
+        {
+            Console.WriteLine("Posicion no valida");
+            Thread.Sleep(750);
         }
     }
 
@@ -149,12 +156,16 @@ public class Lospokemons
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(ashPok, posPok);
         }
-        else
+        else if (player == "Gary")
         {
             for (int i = 0; i < garyPok.Length; ++i) { Console.Write(garyPok[i] + " " + i + ", "); }
             Console.Write("\n\nIntroduce la posicion:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(garyPok, posPok);
+        }
+        else
+        {
+            ShowTeam();
         }
     }
 
@@ -193,7 +204,7 @@ public class Lospokemons
         LoadScreen();
         Random random = new Random();
         Random random2 = new Random();
-        int probabilidad = random.Next(0,100);
+        int probabilidad = random.Next(0, 100);
         if (probabilidad > 50)
         {
             Console.Clear();
@@ -208,7 +219,6 @@ public class Lospokemons
             Console.Clear();
             Console.WriteLine("No has encontrado nada");
             Thread.Sleep(2000);
-            ShowTeam();
         }
     }
 }
