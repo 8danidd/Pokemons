@@ -116,22 +116,43 @@ public class Lospokemons
         ShowTeam();
         Console.WriteLine("Select the position of Pokemon to delete");
         int pos = Convert.ToInt32(Console.ReadLine());
-
-        if (pos >= 0 && pos < ashPok.Length)
+        if (player == "Ash")
         {
-            if (!String.IsNullOrEmpty(ashPok[pos]))
+            if (pos >= 0 && pos < ashPok.Length)
             {
-                ashPok[pos] = null;
+                if (!String.IsNullOrEmpty(ashPok[pos]))
+                {
+                    ashPok[pos] = null;
+                }
+                else
+                {
+                    Console.WriteLine("The position is empty");
+                }
             }
             else
             {
-                Console.WriteLine("The position is empty");
+                Console.WriteLine("Invalid position");
+                Thread.Sleep(750);
             }
         }
-        else
+        if (player == "Gary")
         {
-            Console.WriteLine("Invalid position");
-            Thread.Sleep(750);
+            if (pos >= 0 && pos < garyPok.Length)
+            {
+                if (!String.IsNullOrEmpty(garyPok[pos]))
+                {
+                    garyPok[pos] = null;
+                }
+                else
+                {
+                    Console.WriteLine("The position is empty");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid position");
+                Thread.Sleep(750);
+            }
         }
     }
 
