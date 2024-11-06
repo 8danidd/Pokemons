@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 using System.Security.Cryptography.X509Certificates;
 
 public class Lospokemons
@@ -14,11 +15,17 @@ public class Lospokemons
 
     public static void Main(string[] args)
     {
-        Console.Clear();
-        Console.WriteLine("Press a key to choose the player:\nAsh (Press A)\nGary (Press S)\n");
-        ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
-        if (KeyInfo.Key == ConsoleKey.A) { player = "Ash"; }
-        if (KeyInfo.Key == ConsoleKey.S) { player = "Gary"; }
+        Character();
+
+        static void Character()
+        {
+            Console.Clear();
+            Console.WriteLine("Press a key to choose the player:\nAsh (Press A)\nGary (Press S)\n");
+            ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
+            if (KeyInfo.Key == ConsoleKey.A) { player = "Ash"; }
+            else if (KeyInfo.Key == ConsoleKey.S) { player = "Gary"; }
+            else { Character(); }
+        }
 
         ConsoleKeyInfo keyInfo;
         splashScreen();
@@ -29,7 +36,6 @@ public class Lospokemons
             menu();
             keyInfo = Console.ReadKey(true);
         } while (keyInfo.Key != ConsoleKey.W);
-
     }
 
     static void splashScreen()
