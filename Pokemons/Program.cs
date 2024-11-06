@@ -92,7 +92,7 @@ public class Lospokemons
                 Console.WriteLine("Ash's Pokemons are: ");
                 for (int i = 0; i < ashPok.Length; ++i)
                 {
-                    string result = String.IsNullOrEmpty(ashPok[i]) ? (i + " - null , ") : (i + " - " + ashPok[i] + ", ");
+                    string result = String.IsNullOrEmpty(ashPok[i]) ? (i + " - EMPTY , ") : (i + " - " + ashPok[i] + ", ");
                     Console.Write(result);
                 }
                 Console.WriteLine("\n");
@@ -103,7 +103,7 @@ public class Lospokemons
                 Console.WriteLine("Gary's Pokemons are: ");
                 for (int i = 0; i < garyPok.Length; ++i)
                 {
-                    string result = String.IsNullOrEmpty(garyPok[i]) ? (i + " - null , ") : (i + " - " + garyPok[i] + ", ");
+                    string result = String.IsNullOrEmpty(garyPok[i]) ? (i + " - EMPTY , ") : (i + " - " + garyPok[i] + ", ");
                     Console.Write(result);
                 }
                 Console.WriteLine("\n");
