@@ -11,8 +11,15 @@ public class Lospokemons
     static string[] found = new string[1];
     static string player;
 
+
     public static void Main(string[] args)
     {
+        Console.Clear();
+        Console.WriteLine("Press a key to choose the player:\nAsh (Press A)\nGary (Press S)\n");
+        ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
+        if (KeyInfo.Key == ConsoleKey.A) { player = "Ash"; }
+        if (KeyInfo.Key == ConsoleKey.S) { player = "Gary"; }
+
         ConsoleKeyInfo keyInfo;
         splashScreen();
         InitPokedex();
@@ -27,15 +34,15 @@ public class Lospokemons
 
     static void splashScreen()
     {
+        Console.Clear();
         Console.WriteLine("                                ,'\\\r\n    _.----.        ____         ,'  _\\   ___    ___     ____\r\n_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\r\n\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\r\n \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  |\r\n   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\r\n    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     |\r\n     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\r\n      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\r\n       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\r\n        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\r\n                                `'                            '-._|");
-        Console.WriteLine("Pulsa cualquier tecla para empezar");
+        Console.WriteLine("\n\r\n  _____                                              _                  _                _                _   \r\n |  __ \\                                            | |                | |              | |              | |  \r\n | |__) |_ __  ___  ___  ___    __ _  _ __   _   _  | | __ ___  _   _  | |_  ___    ___ | |_  __ _  _ __ | |_ \r\n |  ___/| '__|/ _ \\/ __|/ __|  / _` || '_ \\ | | | | | |/ // _ \\| | | | | __|/ _ \\  / __|| __|/ _` || '__|| __|\r\n | |    | |  |  __/\\__ \\\\__ \\ | (_| || | | || |_| | |   <|  __/| |_| | | |_| (_) | \\__ \\| |_| (_| || |   | |_ \r\n |_|    |_|   \\___||___/|___/  \\__,_||_| |_| \\__, | |_|\\_\\\\___| \\__, |  \\__|\\___/  |___/ \\__|\\__,_||_|    \\__|\r\n                                              __/ |              __/ |                                        \r\n                                             |___/              |___/                                         \r\n");
         Console.ReadKey(true);
     }
 
     static void menu()
     {
-        Console.WriteLine("\n           MENU PRINCIPAL \n \n");
-        Console.WriteLine("Choose and action:");
+        Console.WriteLine("\r\n███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗\r\n████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║\r\n██╔████╔██║███████║██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║\r\n██║╚██╔╝██║██╔══██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║\r\n██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝\r\n╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ \r\n                                                                          \r\n\n");
         Console.WriteLine("Q - Show Team");
         Console.WriteLine("D - Delete Pokemon");
         Console.WriteLine("C - Catch Pokemon");
@@ -46,18 +53,18 @@ public class Lospokemons
         {
             case ConsoleKey.Q:
                 ShowTeam();
-                Console.WriteLine("\nPulsa cualquier tecla para return to main menu");
+                Console.WriteLine("\nPress any key to return to main menu");
                 break;
             case ConsoleKey.D:
                 DeletePok();
-                Console.WriteLine("\nPulsa cualquier tecla para return to main menu");
+                Console.WriteLine("\nPokemon deleted.\nPress any key to return to main menu");
                 break;
             case ConsoleKey.C:
                 Explore();
-                Console.WriteLine("\nPulsa cualquier tecla para return to main menu");
+                Console.WriteLine("\nPress any key to return to main menu");
                 break;
             case ConsoleKey.W:
-                
+
                 break;
         }
 
@@ -78,20 +85,14 @@ public class Lospokemons
 
     static void ShowTeam()
     {
-        Console.Clear();
-        Console.WriteLine("Pulsa la tecla para elegir al jugador:\nAsh (Pulsa A)\nGary (Pulsa S)\n");
-        ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
-        if (KeyInfo.Key == ConsoleKey.A) { player = "Ash"; }
-        if (KeyInfo.Key == ConsoleKey.S) { player = "Gary"; }
-
         switch (player)
         {
             case ("Ash"):
                 Console.Clear();
-                Console.WriteLine("Los pokemons de Ash son: ");
+                Console.WriteLine("Ash's Pokemons are: ");
                 for (int i = 0; i < ashPok.Length; ++i)
                 {
-                    string result = String.IsNullOrEmpty(ashPok[i]) ? (i + " - null , ") : (i + " - " + ashPok[i] + ", ");
+                    string result = String.IsNullOrEmpty(ashPok[i]) ? (i + " - EMPTY , ") : (i + " - " + ashPok[i] + ", ");
                     Console.Write(result);
                 }
                 Console.WriteLine("\n");
@@ -99,28 +100,15 @@ public class Lospokemons
 
             case ("Gary"):
                 Console.Clear();
-                Console.WriteLine("Los pokemons de Gary son: ");
+                Console.WriteLine("Gary's Pokemons are: ");
                 for (int i = 0; i < garyPok.Length; ++i)
                 {
-                    string result = String.IsNullOrEmpty(garyPok[i]) ? (i + " - null , ") : (i + " - " + garyPok[i] + ", ");
+                    string result = String.IsNullOrEmpty(garyPok[i]) ? (i + " - EMPTY , ") : (i + " - " + garyPok[i] + ", ");
                     Console.Write(result);
                 }
                 Console.WriteLine("\n");
                 break;
         }
-        /*Console.WriteLine("Quieres eliminar algún pokemon? \n");
-        Console.WriteLine("Si: Y \nNo: N");
-        ConsoleKeyInfo KeyInfo2 = Console.ReadKey(true);
-        if (KeyInfo2.Key == ConsoleKey.Y) { DeletePok(); }
-        else
-        {
-            Console.WriteLine("\nQuieres buscar mas pokemons?\n");
-            Console.Write("Si: Y\nNo: N\n");
-            ConsoleKeyInfo KeyInfo3 = Console.ReadKey(true);
-            if (KeyInfo3.Key == ConsoleKey.Y) {
-                Explore();
-            } else { ShowTeam(); }
-        }*/
     }
 
     static void DeletePok()
@@ -142,7 +130,7 @@ public class Lospokemons
         }
         else
         {
-            Console.WriteLine("Posicion no valida");
+            Console.WriteLine("Invalid position");
             Thread.Sleep(750);
         }
     }
@@ -152,14 +140,14 @@ public class Lospokemons
         if (player == "Ash")
         {
             for (int i = 0; i < ashPok.Length; ++i) { Console.Write(ashPok[i] + " " + i + ", "); }
-            Console.Write("\n\nIntroduce la posicion:");
+            Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(ashPok, posPok);
         }
         else if (player == "Gary")
         {
             for (int i = 0; i < garyPok.Length; ++i) { Console.Write(garyPok[i] + " " + i + ", "); }
-            Console.Write("\n\nIntroduce la posicion:");
+            Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(garyPok, posPok);
         }
@@ -179,7 +167,7 @@ public class Lospokemons
         else
         {
             Console.Clear();
-            Console.WriteLine("Posicion no valida");
+            Console.WriteLine("Invalid position");
             Thread.Sleep(750);
             ShowTeam();
         }
@@ -187,12 +175,12 @@ public class Lospokemons
 
     static void LoadScreen()
     {
-        Console.Write("Buscando Pokemons... [");
+        Console.Write("Searching Pokemons... [");
         Thread.Sleep(500);
         for (int i = 0; i < 30; ++i)
         {
             Console.Write("#");
-            Thread.Sleep(125);
+            Thread.Sleep(100);
         }
         Console.Write("]");
         Thread.Sleep(1500);
@@ -208,7 +196,7 @@ public class Lospokemons
         if (probabilidad > 50)
         {
             Console.Clear();
-            Console.WriteLine("¡¡¡HAS CAPTURADO UN POKEMON!!!\n");
+            Console.WriteLine("You found a Pokemon!\n");
             int randomIndex2 = random2.Next(pokemon.Length);
             found[0] = pokemon[randomIndex2];
             Console.WriteLine(Convert.ToString(found[0] + "\n"));
@@ -217,8 +205,17 @@ public class Lospokemons
         else
         {
             Console.Clear();
-            Console.WriteLine("No has encontrado nada");
-            Thread.Sleep(2000);
+            Console.WriteLine("You didn't find anything.\n\nDo you want to try again? Y/N");
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            if (keyInfo.Key == ConsoleKey.Y)
+            {
+                Explore();
+            }
+            else
+            {
+                Console.Clear();
+                menu();
+            }
         }
     }
 }
