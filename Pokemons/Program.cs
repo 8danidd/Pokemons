@@ -64,7 +64,7 @@ public class Lospokemons
                 Console.WriteLine("\nPress any key to return to main menu");
                 break;
             case ConsoleKey.W:
-
+                Environment.Exit(0);
                 break;
         }
 
