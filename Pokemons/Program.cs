@@ -7,25 +7,48 @@ using System.Security.Cryptography.X509Certificates;
 public class Lospokemons
 {
     static string[,] pokemon = {
-    { "Bulbasaur", "Placaje", "Golpe Rápido", "Ataque Rápido", "0" },
-    { "Pikachu", "Impactrueno", "Ataque Rápido", "Placaje", "1" },
-    { "Charmander", "Garra Rápida", "Embate", "Placaje", "0" },
-    { "Onix", "Golpe Roca", "Embate", "Golpe Cuerpo", "0" },
-    { "Squirtle", "Burbuja", "Cabezazo", "Placaje", "0" },
-    { "Jigglypuff", "Canto", "Bofetón Doble", "Golpe Rápido", "0" },
-    { "Meowth", "Arañazo", "Ataque Rápido", "Placaje", "0" },
-    { "Psyduck", "Confusión", "Golpe Cuerpo", "Bofetón Lodo", "0" },
-    { "Snorlax", "Golpe Cuerpo", "Embate", "Placaje", "0" },
-    { "Gengar", "Lengüetazo", "Golpe Rápido", "Embate", "0" },
-    { "Machop", "Karate Chop", "Derribo", "Golpe Bajo", "0" },
-    { "Geodude", "Lanzarrocas", "Placaje", "Embate", "0" },
-    { "Eevee", "Ataque Rápido", "Mordisco", "Placaje", "0" },
-    { "Vulpix", "Arañazo", "Rueda Fuego", "Placaje", "0" },
-    { "Magikarp", "Placaje", "Bofetón Lodo", "Embate", "1" }
+    { "Bulbasaur", "0" },
+    { "Pikachu", "1" },
+    { "Charmander", "0" },
+    { "Onix", "0" },
+    { "Squirtle", "0" },
+    { "Jigglypuff", "0" },
+    { "Meowth", "0" },
+    { "Psyduck", "0" },
+    { "Snorlax", "0" },
+    { "Gengar", "0" },
+    { "Machop", "0" },
+    { "Geodude", "0" },
+    { "Eevee", "0" },
+    { "Vulpix", "0" },
+    { "Magikarp", "1" }
+};
+    static string[,] moves = {
+    { "Tackle", "1" },
+    { "Ember", "5" },
+    { "Quick Attack", "10" },
+    { "Water Gun", "15" },
+    { "Vine Whip", "20" },
+    { "Thunderbolt", "25" },
+    { "Scratch", "30" },
+    { "Flamethrower", "35" },
+    { "Ice Beam", "40" },
+    { "Earthquake", "45" },
+    { "Pound", "50" },
+    { "Dragon Claw", "55" },
+    { "Surf", "60" },
+    { "Shadow Ball", "65" },
+    { "Hyper Beam", "70" },
+    { "Leaf Blade", "75" },
+    { "Solar Beam", "80" },
+    { "Sludge Bomb", "85" },
+    { "Iron Tail", "90" },
+    { "Hyper Fang", "95" },
+    { "Thunder", "100" }
 };
     static string[,] ashPok = new string[5,5];
     static string[,] garyPok = new string[5,5];
-    static string[] found = new string[1];
+    static string[,] found = new string[1,1];
     static string player;
     static int ashPower = 0;
     static int garyPower = 0;
@@ -111,7 +134,7 @@ public class Lospokemons
         }
     }
 
-    static void ShowTeam()
+    static void ShowTeam() //arreglar la generacion de los ataques
     {
         switch (player)
         {
@@ -120,7 +143,7 @@ public class Lospokemons
                 Console.WriteLine("Ash's Pokemons are: ");
                 for (int i = 0; i < ashPok.GetLength(0); i++)
                 {
-                    if (ashPok[i, 4] == "1")
+                    if (ashPok[i, 1] == "1")
                     {
                         shiny = "SHINY ";
                     }
@@ -136,17 +159,24 @@ public class Lospokemons
             case ("Gary"):
                 Console.Clear();
                 Console.WriteLine("Gary's Pokemons are: ");
-                for (int i = 0; i < garyPok.Length; ++i)
+                for (int i = 0; i < garyPok.GetLength(0); i++)
                 {
-                    string result = String.IsNullOrEmpty(garyPok[i,i]) ? (i + " - EMPTY , ") : (i + " - " + garyPok[i,i] + ", ");
-                    Console.Write(result);
+                    if (garyPok[i, 1] == "1")
+                    {
+                        shiny = "SHINY ";
+                    }
+                    Console.WriteLine(i + 1 + " - " + shiny + garyPok[i, 0]);
+                    Console.WriteLine("Move 1: " + garyPok[i, 1]);
+                    Console.WriteLine("Move 2: " + garyPok[i, 2]);
+                    Console.WriteLine("Move 3: " + garyPok[i, 3]);
+                    Console.WriteLine();
                 }
                 Console.WriteLine("\n");
                 break;
         }
     }
 
-    static void DeletePok()
+    static void DeletePok() //arreglar esto para que elimine todos los datos del pokemon
     {
         ShowTeam();
         Console.WriteLine("Select the position of Pokemon to delete");
@@ -155,9 +185,9 @@ public class Lospokemons
         {
             if (pos >= 0 && pos < ashPok.Length)
             {
-                if (!String.IsNullOrEmpty(ashPok[pos,0]))
+                if (!String.IsNullOrEmpty(ashPok[pos - 1,0]))
                 {
-                    ashPok[pos,0] = null;
+                    ashPok[pos - 1,0] = null;
                 }
                 else
                 {
@@ -174,9 +204,9 @@ public class Lospokemons
         {
             if (pos >= 0 && pos < garyPok.Length)
             {
-                if (!String.IsNullOrEmpty(garyPok[pos,0]))
+                if (!String.IsNullOrEmpty(garyPok[pos - 1, 0]))
                 {
-                    garyPok[pos,0] = null;
+                    garyPok[pos - 1, 0] = null;
                 }
                 else
                 {
@@ -191,18 +221,18 @@ public class Lospokemons
         }
     }
 
-    static void AddPokemon(string newPok)
+    static void AddPokemon(string newPok) 
     {
         if (player == "Ash")
         {
-            for (int i = 0; i < ashPok.Length; ++i) { Console.Write(ashPok[i,i] + " " + i + ", "); }
+            for (int i = 0; i < ashPok.GetLength(1); ++i) { Console.Write(ashPok[i,0] + " " + i + ", "); }
             Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(ashPok, posPok);
         }
         else if (player == "Gary")
         {
-            for (int i = 0; i < garyPok.Length; ++i) { Console.Write(garyPok[i,i] + " " + i + ", "); }
+            for (int i = 0; i < garyPok.GetLength(1); ++i) { Console.Write(garyPok[i,0] + " " + i + ", "); }
             Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(garyPok, posPok);
@@ -213,11 +243,11 @@ public class Lospokemons
         }
     }
 
-    static void NewPok(string[,] pokemons, int posPok)
+    static void NewPok(string[,] pokemons, int posPok) //arreglar para que añada el pokemon con sus respectivos ataques
     {
         if (posPok >= 0 && posPok < pokemons.Length)
         {
-            pokemons[posPok,0] = found[0];
+            pokemons[posPok,0] = found[0,0];
             ShowTeam();
         }
         else
@@ -253,10 +283,10 @@ public class Lospokemons
         {
             Console.Clear();
             Console.WriteLine("You found a Pokemon!\n");
-            int randomIndex2 = random2.Next(pokemon.Length);
-            found[0] = pokemon[randomIndex2,0];
-            Console.WriteLine(Convert.ToString(found[0] + "\n"));
-            AddPokemon(found[0]);
+            int randomIndex2 = random2.Next(pokemon.GetLength(0));
+            found[0,0] = pokemon[randomIndex2,0];
+            Console.WriteLine(Convert.ToString(found[0,0] + "\n"));
+            AddPokemon(found[0,0]);
         }
         else
         {
