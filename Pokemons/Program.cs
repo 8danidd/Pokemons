@@ -120,7 +120,7 @@ public class Lospokemons
 
     }
 
-    static void InitPokedex()
+    static void InitPokedex() //arreglar la generacion de los ataques
     {
         Random random = new Random();
         Random random2 = new Random();
