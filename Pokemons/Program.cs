@@ -46,8 +46,10 @@ public class Lospokemons
     { "Hyper Fang", "95" },
     { "Thunder", "100" }
 };
-    static string[,] ashPok = new string[5,5];
-    static string[,] garyPok = new string[5,5];
+    static string[,] ashPok = new string[5,2];
+    static string[,] garyPok = new string[5,2];
+    static string[,] ashMove = new string[3, 2];
+    static string[,] garyMove = new string[3, 2];
     static string[,] found = new string[1,1];
     static string player;
     static int ashPower = 0;
@@ -132,6 +134,16 @@ public class Lospokemons
                 garyPok[i, j] = pokemon[randomIndexGary, j];
             }
         }
+        for (int j = 0; j < moves.GetLength(0); j++)
+        {
+            int random2IndexMoveash = random.Next(moves.GetLength(0));
+            int random2IndexMovegary = random.Next(moves.GetLength(0));
+            for (int k = 0; k < moves.GetLength(1); k++)
+            {
+                ashMove[j, k] = moves[random2IndexMoveash, k];
+                garyMove[j, k] = moves[random2IndexMovegary, k];
+            }
+        }
     }
 
     static void ShowTeam() //arreglar la generacion de los ataques
@@ -148,9 +160,9 @@ public class Lospokemons
                         shiny = "SHINY ";
                     }
                     Console.WriteLine(i + 1 + " - " + shiny + ashPok[i, 0]);
-                    Console.WriteLine("Move 1: " + ashPok[i, 1]);
-                    Console.WriteLine("Move 2: " + ashPok[i, 2]);
-                    Console.WriteLine("Move 3: " + ashPok[i, 3]);
+                    Console.WriteLine("Move 1: " + ashMove[0, i] + " - Power: " + ashMove[1, i]);
+                    Console.WriteLine("Move 2: " + ashMove[0, i] + " - Power: " + ashMove[1, i]);
+                    Console.WriteLine("Move 3: " + ashMove[0, i] + " - Power: " + ashMove[1, i]);
                     Console.WriteLine();
                 }
                 Console.WriteLine("\n");
@@ -245,7 +257,7 @@ public class Lospokemons
 
     static void NewPok(string[,] pokemons, int posPok) //arreglar para que añada el pokemon con sus respectivos ataques
     {
-        if (posPok >= 0 && posPok < pokemons.Length)
+        if (posPok >= 0 && posPok < pokemons.GetLength(0))
         {
             pokemons[posPok,0] = found[0,0];
             ShowTeam();
@@ -258,7 +270,6 @@ public class Lospokemons
             ShowTeam();
         }
     }
-
     static void LoadScreen()
     {
         Console.Write("Searching Pokemons... [");
