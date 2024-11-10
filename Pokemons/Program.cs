@@ -109,6 +109,7 @@ public class Lospokemons
                 break;
             case ConsoleKey.D:
                 DeletePok();
+                Console.Clear();
                 Console.WriteLine("\nPokemon deleted.\nPress any key to return to main menu");
                 break;
             case ConsoleKey.C:
@@ -206,8 +207,7 @@ public class Lospokemons
                         Console.Write(ashMove[j + rep, 0] + " - Power: ");
                         for (int k = 0; k < ashMove.GetLength(1) - 2; k++)
                         {
-                            Console.Write(ashMove[j + rep, 1] + " - ");
-                            Console.Write(ashMove[j + rep, 2] + "\n");
+                            Console.Write(ashMove[j + rep, 1] + "\n");
                         }
                     }
                     rep += 3;
@@ -236,8 +236,7 @@ public class Lospokemons
                         Console.Write(garyMove[j + rep, 0] + " - Power: ");
                         for (int k = 0; k < garyMove.GetLength(1) - 2; k++)
                         {
-                            Console.Write(garyMove[j + rep, 1] + " - ");
-                            Console.Write(garyMove[j + rep, 2] + "\n");
+                            Console.Write(garyMove[j + rep, 1] + "\n");
                         }
                     }
                     rep += 3;
