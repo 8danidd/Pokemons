@@ -23,6 +23,7 @@ public class Lospokemons
     { "Vulpix", "0" },
     { "Magikarp", "1" }
 };
+
     static string[,] moves = {
     { "Tackle", "1" },
     { "Ember", "5" },
@@ -48,14 +49,14 @@ public class Lospokemons
 };
     static string[,] ashPok = new string[5, 2];
     static string[,] garyPok = new string[5, 2];
-    static string[,] ashMove = new string[3, 2];
-    static string[,] garyMove = new string[3, 2];
+    static string[,] ashMove = new string[15, 3];
+    static string[,] garyMove = new string[15, 3];
     static string[,] found = new string[1, 1];
     static string player;
     static int ashPower = 0;
     static int garyPower = 0;
     static string shiny = "";
-
+    static int poknum = 1;
 
     public static void Main(string[] args)
     {
@@ -74,6 +75,7 @@ public class Lospokemons
         ConsoleKeyInfo keyInfo;
         splashScreen();
         InitPokedex();
+        InitMove();
         do
         {
             Console.Clear();
@@ -120,34 +122,67 @@ public class Lospokemons
 
     }
 
-    static void InitPokedex() //arreglar la generacion de los ataques
+    static void InitPokedex()
     {
         Random random = new Random();
         Random random2 = new Random();
         for (int i = 0; i < ashPok.GetLength(0); i++)
         {
-            int randomIndexAsh = random.Next(pokemon.GetLength(0));
-            int randomIndexGary = random.Next(pokemon.GetLength(0));
             for (int j = 0; j < pokemon.GetLength(1); j++)
             {
+                int randomIndexAsh = random.Next(pokemon.GetLength(0));
+                int randomIndexGary = random.Next(pokemon.GetLength(0));
                 ashPok[i, j] = pokemon[randomIndexAsh, j];
                 garyPok[i, j] = pokemon[randomIndexGary, j];
             }
         }
-        for (int l = 0; l < moves.GetLength(0); l++)
+    }
+
+    static void InitMove()
+    {
+        Random random = new Random();
+        Random random2 = new Random();
+        for (int l = 0; l < ashMove.GetLength(0); l++)
         {
-            int random2IndexMoveash = random.Next(moves.GetLength(0));
-            int random2IndexMovegary = random.Next(moves.GetLength(0));
             for (int k = 0; k < moves.GetLength(1); k++)
             {
+                int random2IndexMoveash = random.Next(moves.GetLength(0));
+                int random2IndexMovegary = random.Next(moves.GetLength(0));
                 ashMove[l, k] = moves[random2IndexMoveash, k];
-                garyMove[l, k] = moves[random2IndexMovegary, k]; //arreglar esto que no va de ninguna manera
+                garyMove[l, k] = moves[random2IndexMovegary, k];
+                if (poknum < 8)
+                {
+                    ashMove[l, 2] = "1";
+                    garyMove[l, 2] = "1";
+                }
+                else if (poknum < 14)
+                {
+                    ashMove[l, 2] = "2";
+                    garyMove[l, 2] = "2";
+                }
+                else if (poknum < 20)
+                {
+                    ashMove[l, 2] = "3";
+                    garyMove[l, 2] = "3";
+                }
+                else if (poknum < 26)
+                {
+                    ashMove[l, 2] = "4";
+                    garyMove[l, 2] = "4";
+                }
+                else
+                {
+                    ashMove[l, 2] = "5";
+                    garyMove[l, 2] = "5";
+                }
+                poknum++;
             }
         }
     }
 
-    static void ShowTeam() //arreglar la generacion de los ataques
+    static void ShowTeam()
     {
+        int rep = 0;
         switch (player)
         {
             case ("Ash"):
@@ -165,10 +200,19 @@ public class Lospokemons
                         shiny = "SHINY ";
                     }
                     Console.WriteLine(i + 1 + " - " + shiny + ashPok[i, 0]);
-                    Console.Write(ashMove[n, 0]);
+                    shiny = "";
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write(ashMove[j + rep, 0] + " - Power: ");
+                        for (int k = 0; k < ashMove.GetLength(1) - 2; k++)
+                        {
+                            Console.Write(ashMove[j + rep, 1] + " - ");
+                            Console.Write(ashMove[j + rep, 2] + "\n");
+                        }
+                    }
+                    rep += 3;
                     Console.WriteLine();
                 }
-                Console.WriteLine("\n");
                 break;
 
             case ("Gary"):
@@ -176,33 +220,100 @@ public class Lospokemons
                 Console.WriteLine("Gary's Pokemons are: ");
                 for (int i = 0; i < garyPok.GetLength(0); i++)
                 {
+                    int n = -1;
+                    if (n < 1)
+                    {
+                        n++;
+                    }
                     if (garyPok[i, 1] == "1")
                     {
                         shiny = "SHINY ";
                     }
                     Console.WriteLine(i + 1 + " - " + shiny + garyPok[i, 0]);
-                    Console.WriteLine("Move 1: " + garyPok[i, 1]);
-                    Console.WriteLine("Move 2: " + garyPok[i, 2]);
-                    Console.WriteLine("Move 3: " + garyPok[i, 3]);
+                    shiny = "";
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write(garyMove[j + rep, 0] + " - Power: ");
+                        for (int k = 0; k < garyMove.GetLength(1) - 2; k++)
+                        {
+                            Console.Write(garyMove[j + rep, 1] + " - ");
+                            Console.Write(garyMove[j + rep, 2] + "\n");
+                        }
+                    }
+                    rep += 3;
                     Console.WriteLine();
                 }
-                Console.WriteLine("\n");
                 break;
         }
     }
 
-    static void DeletePok() //arreglar esto para que elimine todos los datos del pokemon
+    static void DeletePok()
     {
         ShowTeam();
         Console.WriteLine("Select the position of Pokemon to delete");
         int pos = Convert.ToInt32(Console.ReadLine());
         if (player == "Ash")
         {
-            if (pos >= 0 && pos < ashPok.Length)
+            if (pos >= 1 && pos < ashPok.Length)
             {
                 if (!String.IsNullOrEmpty(ashPok[pos - 1, 0]))
                 {
                     ashPok[pos - 1, 0] = null;
+                    if (pos - 1 == 0)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 2; j++)
+                            {
+                                ashMove[i, j] = null;
+
+                            }
+                        }
+                    }
+                    if (pos - 1 == 1)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 2; j++)
+                            {
+                                ashMove[i + 3, j] = null;
+
+                            }
+                        }
+                    }
+                    if (pos - 1 == 2)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 2; j++)
+                            {
+                                ashMove[i + 6, j] = null;
+
+                            }
+                        }
+                    }
+                    if (pos - 1 == 3)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 2; j++)
+                            {
+                                ashMove[i + 9, j] = null;
+
+                            }
+                        }
+                    }
+                    if (pos - 1 == 4)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 2; j++)
+                            {
+                                ashMove[i + 12, j] = null;
+
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -217,21 +328,80 @@ public class Lospokemons
         }
         if (player == "Gary")
         {
-            if (pos >= 0 && pos < garyPok.Length)
+            if (pos >= 1 && pos < garyPok.Length)
             {
-                if (!String.IsNullOrEmpty(garyPok[pos - 1, 0]))
+                if (!String.IsNullOrEmpty(garyPok[pos, 0]))
                 {
                     garyPok[pos - 1, 0] = null;
+                    if (pos - 1 == 0)
+                    {
+                        garyPok[pos - 1, 0] = null;
+                        if (pos - 1 == 0)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                for (int j = 0; j < 2; j++)
+                                {
+                                    garyMove[i, j] = null;
+
+                                }
+                            }
+                        }
+                        if (pos - 1 == 1)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                for (int j = 0; j < 2; j++)
+                                {
+                                    garyMove[i + 3, j] = null;
+
+                                }
+                            }
+                        }
+                        if (pos - 1 == 2)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                for (int j = 0; j < 2; j++)
+                                {
+                                    garyMove[i + 6, j] = null;
+
+                                }
+                            }
+                        }
+                        if (pos - 1 == 3)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                for (int j = 0; j < 2; j++)
+                                {
+                                    garyMove[i + 9, j] = null;
+
+                                }
+                            }
+                        }
+                        if (pos - 1 == 4)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                for (int j = 0; j < 2; j++)
+                                {
+                                    garyMove[i + 12, j] = null;
+
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The position is empty");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("The position is already empty");
+                    Console.WriteLine("Invalid position");
+                    Thread.Sleep(750);
                 }
-            }
-            else
-            {
-                Console.WriteLine("Invalid position");
-                Thread.Sleep(750);
             }
         }
     }
@@ -240,14 +410,14 @@ public class Lospokemons
     {
         if (player == "Ash")
         {
-            for (int i = 0; i < ashPok.GetLength(1); ++i) { Console.Write(ashPok[i, 0] + " " + i + ", "); }
+            for (int i = 0; i < 5; ++i) { Console.Write(ashPok[i, 0] + " " + i + ", "); }
             Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(ashPok, posPok);
         }
         else if (player == "Gary")
         {
-            for (int i = 0; i < garyPok.GetLength(1); ++i) { Console.Write(garyPok[i, 0] + " " + i + ", "); }
+            for (int i = 0; i < 5; ++i) { Console.Write(garyPok[i, 0] + " " + i + ", "); }
             Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
             NewPok(garyPok, posPok);
@@ -258,7 +428,7 @@ public class Lospokemons
         }
     }
 
-    static void NewPok(string[,] pokemons, int posPok) //arreglar para que añada el pokemon con sus respectivos ataques
+    static void NewPok(string[,] pokemons, int posPok)
     {
         if (posPok >= 0 && posPok < pokemons.GetLength(0))
         {
@@ -285,7 +455,6 @@ public class Lospokemons
         Console.Write("]");
         Thread.Sleep(1500);
     }
-
     static void Explore()
     {
         Console.Clear();
