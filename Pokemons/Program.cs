@@ -206,8 +206,7 @@ public class Lospokemons
                         Console.Write(ashMove[j + rep, 0] + " - Power: ");
                         for (int k = 0; k < ashMove.GetLength(1) - 2; k++)
                         {
-                            Console.Write(ashMove[j + rep, 1] + " - ");
-                            Console.Write(ashMove[j + rep, 2] + "\n");
+                            Console.Write(ashMove[j + rep, 1] + "\n");
                         }
                     }
                     rep += 3;
@@ -413,14 +412,14 @@ public class Lospokemons
             for (int i = 0; i < 5; ++i) { Console.Write(ashPok[i, 0] + " " + i + ", "); }
             Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
-            NewPok(ashPok, posPok);
+            NewPok(ashPok, posPok, ashMove);
         }
         else if (player == "Gary")
         {
             for (int i = 0; i < 5; ++i) { Console.Write(garyPok[i, 0] + " " + i + ", "); }
             Console.Write("\n\nIntroduce the position:");
             int posPok = Convert.ToInt32(Console.ReadLine());
-            NewPok(garyPok, posPok);
+            NewPok(garyPok, posPok, garyMove);
         }
         else
         {
@@ -428,10 +427,21 @@ public class Lospokemons
         }
     }
 
-    static void NewPok(string[,] pokemons, int posPok)
+    static void NewPok(string[,] pokemons, int posPok, string[,] playMoves)
     {
+        Random random = new Random();
+        int Index = posPok * 3;
+
         if (posPok >= 0 && posPok < pokemons.GetLength(0))
         {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    int randomIndex = random.Next(moves.GetLength(0));
+                    playMoves[Index + i, j] = moves[randomIndex, j];
+                }
+            }
             pokemons[posPok, 0] = found[0, 0];
             ShowTeam();
         }
