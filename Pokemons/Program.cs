@@ -108,7 +108,7 @@ public class Lospokemons
                 Console.WriteLine("\nPress any key to return to main menu");
                 break;
             case ConsoleKey.D:
-                DeletePok();
+                DeletePok(player);
                 Console.WriteLine("\nPokemon deleted.\nPress any key to return to main menu");
                 break;
             case ConsoleKey.C:
@@ -246,7 +246,7 @@ public class Lospokemons
         }
     }
 
-    static void DeletePok()
+    static void DeletePok(string player)
     {
         ShowTeam();
         Console.WriteLine("Select the position of Pokemon to delete");
@@ -258,58 +258,15 @@ public class Lospokemons
                 if (!String.IsNullOrEmpty(ashPok[pos - 1, 0]))
                 {
                     ashPok[pos - 1, 0] = null;
-                    if (pos - 1 == 0)
+
+                    if (pos - 1 >= 0 && pos - 1 <= 4)
                     {
+                        int Index = (pos - 1) * 3;
                         for (int i = 0; i < 3; i++)
                         {
                             for (int j = 0; j < 2; j++)
                             {
-                                ashMove[i, j] = null;
-
-                            }
-                        }
-                    }
-                    if (pos - 1 == 1)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            for (int j = 0; j < 2; j++)
-                            {
-                                ashMove[i + 3, j] = null;
-
-                            }
-                        }
-                    }
-                    if (pos - 1 == 2)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            for (int j = 0; j < 2; j++)
-                            {
-                                ashMove[i + 6, j] = null;
-
-                            }
-                        }
-                    }
-                    if (pos - 1 == 3)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            for (int j = 0; j < 2; j++)
-                            {
-                                ashMove[i + 9, j] = null;
-
-                            }
-                        }
-                    }
-                    if (pos - 1 == 4)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            for (int j = 0; j < 2; j++)
-                            {
-                                ashMove[i + 12, j] = null;
-
+                                ashMove[Index + i, j] = null;
                             }
                         }
                     }
@@ -332,62 +289,15 @@ public class Lospokemons
                 if (!String.IsNullOrEmpty(garyPok[pos, 0]))
                 {
                     garyPok[pos - 1, 0] = null;
-                    if (pos - 1 == 0)
+
+                    if (pos - 1 >= 0 && pos - 1 <= 4)
                     {
-                        garyPok[pos - 1, 0] = null;
-                        if (pos - 1 == 0)
+                        int Index = (pos - 1) * 3;
+                        for (int i = 0; i < 3; i++)
                         {
-                            for (int i = 0; i < 3; i++)
+                            for (int j = 0; j < 2; j++)
                             {
-                                for (int j = 0; j < 2; j++)
-                                {
-                                    garyMove[i, j] = null;
-
-                                }
-                            }
-                        }
-                        if (pos - 1 == 1)
-                        {
-                            for (int i = 0; i < 3; i++)
-                            {
-                                for (int j = 0; j < 2; j++)
-                                {
-                                    garyMove[i + 3, j] = null;
-
-                                }
-                            }
-                        }
-                        if (pos - 1 == 2)
-                        {
-                            for (int i = 0; i < 3; i++)
-                            {
-                                for (int j = 0; j < 2; j++)
-                                {
-                                    garyMove[i + 6, j] = null;
-
-                                }
-                            }
-                        }
-                        if (pos - 1 == 3)
-                        {
-                            for (int i = 0; i < 3; i++)
-                            {
-                                for (int j = 0; j < 2; j++)
-                                {
-                                    garyMove[i + 9, j] = null;
-
-                                }
-                            }
-                        }
-                        if (pos - 1 == 4)
-                        {
-                            for (int i = 0; i < 3; i++)
-                            {
-                                for (int j = 0; j < 2; j++)
-                                {
-                                    garyMove[i + 12, j] = null;
-
-                                }
+                                garyMove[Index + i, j] = null;
                             }
                         }
                     }
